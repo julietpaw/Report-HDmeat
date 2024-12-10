@@ -58,6 +58,7 @@
   <ItemGroup>
     <Report Include="Report1 szczegółowy.rdl" />
     <Report Include="Report2 wykres.rdl" />
+    <Report Include="Report3 zbiorczy z filtrami .rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

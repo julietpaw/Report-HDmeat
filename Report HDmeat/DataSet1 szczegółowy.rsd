@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>DataSource_HDmeat</DataSourceReference>
+      <CommandText>SELECT 
+    tf.id_czas,
+    czas.rok,
+    lokalizacja.wojewodztwo,
+    produkt.nazwa_produktu,
+    tf.id_jednostka_miary,
+    jednostka_miary.symbol,
+    tf.wartosc
+FROM dbo.tfakt tf
+JOIN dbo.CZAS czas ON tf.id_czas = czas.id_czas
+JOIN dbo.lokalizacja lokalizacja ON tf.id_lokalizacja = lokalizacja.id_lokalizacja
+JOIN dbo.produkt produkt ON tf.id_produkt = produkt.id_produkt
+JOIN dbo.jednostka_miary jednostka_miary ON tf.id_jednostka_miary = jednostka_miary.id_jednostka_miary;</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="id_czas">
+        <DataField>id_czas</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="rok">
+        <DataField>rok</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="wojewodztwo">
+        <DataField>wojewodztwo</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="nazwa_produktu">
+        <DataField>nazwa_produktu</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="id_jednostka_miary">
+        <DataField>id_jednostka_miary</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="wartosc">
+        <DataField>wartosc</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="symbol">
+        <DataField>symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

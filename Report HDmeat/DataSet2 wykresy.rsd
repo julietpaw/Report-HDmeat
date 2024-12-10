@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet2">
+    <Query>
+      <DataSourceReference>DataSource_HDmeat</DataSourceReference>
+      <CommandText>SELECT 
+    lokalizacja.wojewodztwo,
+    produkt.nazwa_produktu,
+    SUM(tf.wartosc) AS suma_wartosci
+FROM dbo.tfakt tf
+JOIN dbo.lokalizacja lokalizacja ON tf.id_lokalizacja = lokalizacja.id_lokalizacja
+JOIN dbo.produkt produkt ON tf.id_produkt = produkt.id_produkt
+GROUP BY lokalizacja.wojewodztwo, produkt.nazwa_produktu;</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="wojewodztwo">
+        <DataField>wojewodztwo</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="nazwa_produktu">
+        <DataField>nazwa_produktu</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="suma_wartosci">
+        <DataField>suma_wartosci</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

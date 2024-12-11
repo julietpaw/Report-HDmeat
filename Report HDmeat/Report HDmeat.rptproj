@@ -51,6 +51,7 @@
   <ItemGroup>
     <DataSet Include="DataSet1 szczegółowy.rsd" />
     <DataSet Include="DataSet2 wykresy.rsd" />
+    <DataSet Include="DataSet3 zmiany cen.rsd" />
   </ItemGroup>
   <ItemGroup>
     <DataSource Include="DataSource_HDmeat.rds" />
@@ -59,6 +60,7 @@
     <Report Include="Report1 szczegółowy.rdl" />
     <Report Include="Report2 wykres.rdl" />
     <Report Include="Report3 zbiorczy z filtrami .rdl" />
+    <Report Include="Report4 zmina cen.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

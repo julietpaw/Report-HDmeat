@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>DataSource_HDmeat</DataSourceReference>
+      <CommandText>SELECT        rd.data, p.nazwa_produktu, AVG(rd.cena) AS SredniaCena
+FROM            reformatted_data AS rd INNER JOIN
+                         produkt AS p ON rd.produkt = p.nazwa_produktu
+GROUP BY rd.data, p.nazwa_produktu
+ORDER BY rd.data</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="data">
+        <DataField>data</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="nazwa_produktu">
+        <DataField>nazwa_produktu</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="SredniaCena">
+        <DataField>SredniaCena</DataField>
+        <rd:TypeName>System.Double</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

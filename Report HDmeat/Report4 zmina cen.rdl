@@ -6,91 +6,26 @@
     <DataSource Name="DataSource1">
       <DataSourceReference>DataSource_HDmeat</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>11fabf7d-667c-4d2a-9e64-0af3953f381f</rd:DataSourceID>
+      <rd:DataSourceID>a61f2626-9a79-4105-8321-dd777f5d0466</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@Rok">
-            <Value>=Parameters!Rok.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Wojewodztwo">
-            <Value>=Parameters!Wojewodztwo.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Nazwa_produktu">
-            <Value>=Parameters!Nazwa_produktu.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <CommandText>SELECT 
-    cz.rok AS rok, 
-    l.wojewodztwo AS wojewodztwo, 
-    p.nazwa_produktu, 
-    tf.wartosc
-FROM dbo.tfakt tf
-JOIN dbo.produkt p ON tf.id_produkt = p.id_produkt
-JOIN dbo.lokalizacja l ON tf.id_lokalizacja = l.id_lokalizacja
-join dbo.Czas cz on cz.id_czas=tf.id_czas
-WHERE 
-    (@Rok IS NULL OR cz.rok= @Rok)
-    AND (@Wojewodztwo IS NULL OR l.wojewodztwo= @Wojewodztwo)
-and (@Nazwa_produktu is null or p.nazwa_produktu=@Nazwa_produktu)</CommandText>
-      </Query>
+      <SharedDataSet>
+        <SharedDataSetReference>DataSet3 zmiany cen</SharedDataSetReference>
+      </SharedDataSet>
       <Fields>
-        <Field Name="rok">
-          <DataField>rok</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="wojewodztwo">
-          <DataField>wojewodztwo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="data">
+          <DataField>data</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="nazwa_produktu">
           <DataField>nazwa_produktu</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="wartosc">
-          <DataField>wartosc</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@Rok">
-            <Value>=Parameters!Rok.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <CommandText>SELECT l.wojewodztwo, p.nazwa_produktu, SUM(tf.wartosc) AS suma_wartosc,
-cz.rok as rok
-FROM     tfakt AS tf INNER JOIN
-                  produkt AS p ON tf.id_produkt = p.id_produkt INNER JOIN
-                  lokalizacja AS l ON tf.id_lokalizacja = l.id_lokalizacja INNER JOIN
-                  CZAS AS cz ON cz.id_czas = tf.id_czas
-WHERE  (@Rok IS NULL) OR
-                  (cz.rok = @Rok)
-GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="wojewodztwo">
-          <DataField>wojewodztwo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nazwa_produktu">
-          <DataField>nazwa_produktu</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="suma_wartosc">
-          <DataField>suma_wartosc</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="rok">
-          <DataField>rok</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="SredniaCena">
+          <DataField>SredniaCena</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -99,12 +34,9 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
     <ReportSection>
       <Body>
         <ReportItems>
-          <Tablix Name="Tablix2">
+          <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
-                <TablixColumn>
-                  <Width>2.5cm</Width>
-                </TablixColumn>
                 <TablixColumn>
                   <Width>2.5cm</Width>
                 </TablixColumn>
@@ -121,21 +53,21 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox8">
+                        <Textbox Name="Textbox1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>rok</Value>
+                                  <Value>data</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -151,37 +83,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox10">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>wojewodztwo</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox10</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox12">
+                        <Textbox Name="Textbox3">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -195,7 +97,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -211,23 +113,21 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox14">
+                        <Textbox Name="Textbox5">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>wartosc</Value>
-                                  <Style>
-                                    <FontFamily>Arial</FontFamily>
-                                  </Style>
+                                  <Value>Srednia Cena</Value>
+                                  <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -248,51 +148,21 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="rok">
+                        <Textbox Name="data">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!rok.Value</Value>
+                                  <Value>=Fields!data.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>rok</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="wojewodztwo">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!wojewodztwo.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>wojewodztwo</rd:DefaultName>
+                          <rd:DefaultName>data</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -338,23 +208,21 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="wartosc">
+                        <Textbox Name="SredniaCena">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!wartosc.Value</Value>
-                                  <Style>
-                                    <FontFamily>Arial</FontFamily>
-                                  </Style>
+                                  <Value>=Fields!SredniaCena.Value</Value>
+                                  <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>wartosc</rd:DefaultName>
+                          <rd:DefaultName>SredniaCena</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -377,7 +245,6 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -391,37 +258,37 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Filters>
-              <Filter>
-                <FilterExpression>=Fields!rok.Value</FilterExpression>
-                <Operator>Equal</Operator>
-                <FilterValues>
-                  <FilterValue>=IIf(Parameters!Rok.Value = Nothing, Fields!rok.Value, Parameters!Rok.Value)</FilterValue>
-                </FilterValues>
-              </Filter>
-              <Filter>
-                <FilterExpression>=Fields!wojewodztwo.Value</FilterExpression>
-                <Operator>Equal</Operator>
-                <FilterValues>
-                  <FilterValue>=IIf(Parameters!Wojewodztwo.Value = Nothing, Fields!wojewodztwo.Value, Parameters!Wojewodztwo.Value)</FilterValue>
-                </FilterValues>
-              </Filter>
-            </Filters>
-            <Top>5.99017cm</Top>
-            <Left>0.254cm</Left>
+            <Left>18.48208cm</Left>
             <Height>1.2cm</Height>
-            <Width>10cm</Width>
+            <Width>7.5cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Tablix>
-          <Chart Name="Chart5">
+          <Chart Name="Chart1">
             <ChartCategoryHierarchy>
               <ChartMembers>
                 <ChartMember>
-                  <Group Name="Chart5_CategoryGroup">
+                  <Group Name="Chart1_CategoryGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!data.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!data.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!data.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_SeriesGroup">
                     <GroupExpressions>
                       <GroupExpression>=Fields!nazwa_produktu.Value</GroupExpression>
                     </GroupExpressions>
@@ -434,26 +301,18 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                   <Label>=Fields!nazwa_produktu.Value</Label>
                 </ChartMember>
               </ChartMembers>
-            </ChartCategoryHierarchy>
-            <ChartSeriesHierarchy>
-              <ChartMembers>
-                <ChartMember>
-                  <Label>wartosc</Label>
-                </ChartMember>
-              </ChartMembers>
             </ChartSeriesHierarchy>
             <ChartData>
               <ChartSeriesCollection>
-                <ChartSeries Name="wartosc">
+                <ChartSeries Name="SredniaCena">
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Fields!wartosc.Value)</Y>
+                        <Y>=Sum(Fields!SredniaCena.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
                         <UseValueAsLabel>true</UseValueAsLabel>
-                        <Visible>true</Visible>
                       </ChartDataLabel>
                       <Style />
                       <ChartMarker>
@@ -462,7 +321,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Subtype>Stacked</Subtype>
+                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -526,7 +385,6 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                       </Style>
                     </ChartMajorTickMarks>
                     <ChartMinorTickMarks>
-                      <Enabled>True</Enabled>
                       <Style>
                         <Border>
                           <Color>Gainsboro</Color>
@@ -537,7 +395,6 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                     <CrossAt>NaN</CrossAt>
                     <Minimum>NaN</Minimum>
                     <Maximum>NaN</Maximum>
-                    <MinFontSize>5pt</MinFontSize>
                     <ChartAxisScaleBreak>
                       <Style />
                     </ChartAxisScaleBreak>
@@ -610,7 +467,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                       <Color>#5c5c5c</Color>
                     </Style>
                     <ChartAxisTitle>
-                      <Caption>Wartość</Caption>
+                      <Caption />
                       <Style>
                         <FontSize>9pt</FontSize>
                         <Color>#5c5c5c</Color>
@@ -648,8 +505,8 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                       <Length>0.5</Length>
                     </ChartMinorTickMarks>
                     <CrossAt>NaN</CrossAt>
-                    <Minimum>0</Minimum>
-                    <Maximum>=Max(Fields!wartosc.Value)</Maximum>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
                     <ChartAxisScaleBreak>
                       <Style />
                     </ChartAxisScaleBreak>
@@ -737,7 +594,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
             </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
-                <Caption>Tytuł wykresu</Caption>
+                <Caption>Zmienność cen produktów mięsnych na przestrzeni lat</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>9pt</FontSize>
@@ -767,17 +624,8 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
-            <Filters>
-              <Filter>
-                <FilterExpression>=Fields!wojewodztwo.Value</FilterExpression>
-                <Operator>Equal</Operator>
-                <FilterValues>
-                  <FilterValue>=IIf(Parameters!Wojewodztwo.Value = Nothing, Fields!wojewodztwo.Value, Parameters!Wojewodztwo.Value)</FilterValue>
-                </FilterValues>
-              </Filter>
-            </Filters>
-            <Height>5.37042cm</Height>
-            <Width>22.07325cm</Width>
+            <Height>7.38125cm</Height>
+            <Width>17.68646cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -788,98 +636,11 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
               <BackgroundGradientType>None</BackgroundGradientType>
             </Style>
           </Chart>
-          <Textbox Name="Textbox1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.254cm</Top>
-            <Left>0.254cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.5cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Przejdz do: </Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Zmienność cenen w czasie</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <ActionInfo>
-              <Actions>
-                <Action>
-                  <Drillthrough>
-                    <ReportName>Report4 zmina cen</ReportName>
-                  </Drillthrough>
-                </Action>
-              </Actions>
-            </ActionInfo>
-            <Top>0.254cm</Top>
-            <Left>22.83172cm</Left>
-            <Height>2.08167cm</Height>
-            <Width>6.78625cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
-        <Height>4.91965in</Height>
+        <Height>2.906in</Height>
         <Style />
       </Body>
-      <Width>12.20921in</Width>
+      <Width>10.22917in</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
@@ -892,61 +653,12 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParameters>
-    <ReportParameter Name="Rok">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
-        </Values>
-      </DefaultValue>
-      <Prompt>Rok</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Wojewodztwo">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
-        </Values>
-      </DefaultValue>
-      <Prompt>Wojewodztwo</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Nazwa_produktu">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
-        </Values>
-      </DefaultValue>
-      <Prompt>Nazwa_produktu</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Rok</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Wojewodztwo</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Nazwa_produktu</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>5c0eb239-c8a2-4263-8383-b5b75da331be</rd:ReportID>
+  <rd:ReportID>390d5c5e-a97f-4edf-9b9d-7820b64b0702</rd:ReportID>
 </Report>

@@ -1605,6 +1605,11 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                 <Action>
                   <Drillthrough>
                     <ReportName>Report1</ReportName>
+                    <Parameters>
+                      <Parameter Name="wybierz_rok">
+                        <Value>=First(Fields!rok.Value, "DataSet1")</Value>
+                      </Parameter>
+                    </Parameters>
                   </Drillthrough>
                 </Action>
               </Actions>

@@ -458,8 +458,10 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                 </FilterValues>
               </Filter>
             </Filters>
-            <Height>7.72258cm</Height>
-            <Width>19.19811cm</Width>
+            <Top>9.92979cm</Top>
+            <Left>0.17639cm</Left>
+            <Height>7.31661cm</Height>
+            <Width>22.77886cm</Width>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -511,9 +513,10 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                 </Action>
               </Actions>
             </ActionInfo>
-            <Left>19.3745cm</Left>
-            <Height>2.08167cm</Height>
-            <Width>7.42944cm</Width>
+            <Top>0.45889cm</Top>
+            <Left>8.28282cm</Left>
+            <Height>1.02333cm</Height>
+            <Width>4.46611cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -556,7 +559,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Fields!wartosc.Value)</Y>
+                        <Y>=Format(Avg(Fields!wartosc.Value), "N2")</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -842,7 +845,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
             </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
-                <Caption>Wartość produktu w województwach</Caption>
+                <Caption>Wartość produktów mięsnych w województwach</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>9pt</FontSize>
@@ -872,10 +875,10 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
-            <Top>8.26029cm</Top>
-            <Left>0.34925cm</Left>
-            <Height>6.79917cm</Height>
-            <Width>10.76325cm</Width>
+            <Top>2.423cm</Top>
+            <Left>0.17639cm</Left>
+            <Height>7.11667cm</Height>
+            <Width>11.08075cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1154,8 +1157,8 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>2.25806cm</Top>
-            <Left>19.30394cm</Left>
+            <Top>2.423cm</Top>
+            <Left>23.44208cm</Left>
             <Height>1.2cm</Height>
             <Width>7.5cm</Width>
             <ZIndex>3</ZIndex>
@@ -1378,7 +1381,7 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
             </RadialGauges>
             <GaugeLabels>
               <GaugeLabel Name="GaugeLabel1">
-                <Text>=(Fields!wartosc.Value)</Text>
+                <Text>=Format(Avg(Fields!wartosc.Value), "N2")</Text>
                 <TextShadowOffset>0pt</TextShadowOffset>
                 <UseFontPercent>true</UseFontPercent>
                 <Style>
@@ -1432,10 +1435,10 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
               <Value />
             </TopImage>
             <DataSetName>DataSet1</DataSetName>
-            <Top>8.26029cm</Top>
-            <Left>11.69811cm</Left>
-            <Height>5cm</Height>
-            <Width>7.5cm</Width>
+            <Top>2.423cm</Top>
+            <Left>11.8745cm</Left>
+            <Height>7.11667cm</Height>
+            <Width>11.08075cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -1444,8 +1447,137 @@ GROUP BY l.wojewodztwo, p.nazwa_produktu, cz.rok</CommandText>
               <BackgroundColor>White</BackgroundColor>
             </Style>
           </GaugePanel>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Przejdź do raportu:</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>szczegółowego </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <ActionInfo>
+              <Actions>
+                <Action>
+                  <Drillthrough>
+                    <ReportName>Report1 szczegółowy</ReportName>
+                  </Drillthrough>
+                </Action>
+              </Actions>
+            </ActionInfo>
+            <Top>0.45889cm</Top>
+            <Left>13.29288cm</Left>
+            <Height>1.02333cm</Height>
+            <Width>3.98104cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Analiza cen przedaży mięs w województwach</Value>
+                    <Style>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>0.45889cm</Top>
+            <Left>0.17639cm</Left>
+            <Height>1.50331cm</Height>
+            <Width>7.96532cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Przejdź do raportu:</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>z wykresem</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <ActionInfo>
+              <Actions>
+                <Action>
+                  <Drillthrough>
+                    <ReportName>Report2 wykres</ReportName>
+                  </Drillthrough>
+                </Action>
+              </Actions>
+            </ActionInfo>
+            <Top>0.45889cm</Top>
+            <Left>17.90731cm</Left>
+            <Height>1.02333cm</Height>
+            <Width>3.98104cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>5.92892in</Height>
+        <Height>8.09222in</Height>
         <Style />
       </Body>
       <Width>13.79258in</Width>

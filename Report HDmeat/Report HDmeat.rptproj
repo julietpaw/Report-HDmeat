@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Report1 szczegółowy.rdl" />
+    <Report Include="Report1.rdl" />
     <Report Include="Report2 wykres.rdl" />
     <Report Include="Report3 zbiorczy z filtrami .rdl" />
     <Report Include="Report4 zmina cen.rdl" />
